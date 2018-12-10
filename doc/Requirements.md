@@ -8,8 +8,8 @@
 
 ### functional requirements:
 * www.c4model.com (Simon Brown) -> level 2 Diagrams
-2) Project architecture, microservices boilerplate form Fb Group
-3) First week: begin to work on a module
+* Project architecture, microservices boilerplate form Fb Group
+* First week: begin to work on a module
 
 
 ### non-functional requirements(NFR):
