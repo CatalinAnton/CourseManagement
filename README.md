@@ -13,5 +13,5 @@ dotNet 2018-2019 project
 ### Description ###
 The product is designed to manage __attendance__ at courses, laboratories and seminars, assign __grades__ and __tasks/homeworks__ for the attendees. There are 2 types of users: teacher and attendee.
 
-Dependant tools:
+### Tools ###
 MongoDB Community Server 4.0.4 (use initMongoDB.bat to configure MongoDB for this project)
