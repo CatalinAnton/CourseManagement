@@ -9,13 +9,13 @@ namespace AuthAPI.Services
 {
     public class UserService
     {
-        private readonly IMongoCollection<Book> _users;
+        private readonly IMongoCollection<User> _users;
 
         public UserService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("CourseManagementDB"));
             var database = client.GetDatabase("CourseManagementDB");
-            _books = database.GetCollection<Book>("User");
+            _users = database.GetCollection<User>("User");
         }
 
         public List<User> Get()
@@ -27,7 +27,7 @@ namespace AuthAPI.Services
         {
             var docId = new ObjectId(id);
 
-            return _users.Find<Book>(user => user.Id == docId).FirstOrDefault();
+            return _users.Find<User>(user => user.Id == docId).FirstOrDefault();
         }
 
         public User Create(User user)
