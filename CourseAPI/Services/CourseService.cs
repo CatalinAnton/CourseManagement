@@ -11,7 +11,7 @@ namespace CourseAPI.Services
     {
         private readonly IMongoCollection<Course> _courses;
 
-        public BookService(IConfiguration config)
+        public CourseService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("CourseManagementDB"));
             var database = client.GetDatabase("CourseManagementDB");
