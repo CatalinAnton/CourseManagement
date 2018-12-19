@@ -5,7 +5,7 @@ namespace AuthAPI.Models
 {
     public class User
     {
-        public ObjectId Id { get; set; }
+        public ObjectId ID { get; set; }
 
         [BsonElement("Last_Name")]
         public string LastName { get; set; }
