@@ -40,7 +40,7 @@ namespace AuthAPI.Controllers
         {
             _userService.Create(user);
 
-            return CreatedAtRoute("GetUser", new { id = user.ID.ToString() }, user);
+            return CreatedAtRoute("GetUser", new { id = user._id.ToString() }, user);
         }
 
         [HttpPut("{id:length(24)}")]
@@ -68,7 +68,7 @@ namespace AuthAPI.Controllers
                 return NotFound();
             }
 
-            _userService.Remove(user.ID);
+            _userService.Remove(user._id);
 
             return NoContent();
         }

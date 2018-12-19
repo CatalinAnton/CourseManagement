@@ -27,7 +27,7 @@ namespace AuthAPI.Services
         {
             var docId = new ObjectId(id);
 
-            return _users.Find<User>(user => user.ID == docId).FirstOrDefault();
+            return _users.Find<User>(user => user._id == docId).FirstOrDefault();
         }
 
         public User Create(User user)
@@ -40,17 +40,17 @@ namespace AuthAPI.Services
         {
             var docId = new ObjectId(id);
 
-            _users.ReplaceOne(user => user.ID == docId, userIn);
+            _users.ReplaceOne(user => user._id == docId, userIn);
         }
 
         public void Remove(User userIn)
         {
-            _users.DeleteOne(user => user.ID == userIn.ID);
+            _users.DeleteOne(user => user._id == userIn._id);
         }
 
         public void Remove(ObjectId id)
         {
-            _users.DeleteOne(user => user.ID == id);
+            _users.DeleteOne(user => user._id == id);
         }
     }
 }

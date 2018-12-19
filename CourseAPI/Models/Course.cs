@@ -5,7 +5,7 @@ namespace CourseAPI.Models
 {
     public class Course
     {
-        public ObjectId ID { get; set; }
+        public ObjectId _id { get; set; }
 
         [BsonElement("Year")]
         public string Year { get; set; }

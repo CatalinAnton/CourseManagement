@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/courses")]
     [ApiController]
     public class BooksController : ControllerBase
     {
@@ -40,7 +40,7 @@ namespace CourseAPI.Controllers
         {
             _courseService.Create(course);
 
-            return CreatedAtRoute("GetCourse", new { id = course.ID.ToString() }, course);
+            return CreatedAtRoute("GetCourse", new { id = course._id.ToString() }, course);
         }
 
         [HttpPut("{id:length(24)}")]
@@ -68,7 +68,7 @@ namespace CourseAPI.Controllers
                 return NotFound();
             }
 
-            _courseService.Remove(course.ID);
+            _courseService.Remove(course._id);
 
             return NoContent();
         }

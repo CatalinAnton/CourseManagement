@@ -27,7 +27,7 @@ namespace CourseAPI.Services
         {
             var docId = new ObjectId(id);
 
-            return _courses.Find<Course>(course => course.ID == docId).FirstOrDefault();
+            return _courses.Find<Course>(course => course._id == docId).FirstOrDefault();
         }
 
         public Course Create(Course course)
@@ -40,17 +40,17 @@ namespace CourseAPI.Services
         {
             var docId = new ObjectId(id);
 
-            _courses.ReplaceOne(course => course.ID == docId, courseIn);
+            _courses.ReplaceOne(course => course._id == docId, courseIn);
         }
 
         public void Remove(Course courseIn)
         {
-            _courses.DeleteOne(course => course.ID == courseIn.ID);
+            _courses.DeleteOne(course => course._id == courseIn._id);
         }
 
         public void Remove(ObjectId id)
         {
-            _courses.DeleteOne(course => course.ID == id);
+            _courses.DeleteOne(course => course._id == id);
         }
     }
 }
