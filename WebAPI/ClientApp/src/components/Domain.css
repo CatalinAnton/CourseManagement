@@ -1,0 +1,14 @@
+a.card-link{
+    margin-left:0!important;
+}
+
+.list-group-item div{
+    display:inline-block;
+}
+.btn-link{
+    padding:0;
+    color:#ffc107;
+}
+.btn-link:hover{
+    color: #e5a907;
+}
