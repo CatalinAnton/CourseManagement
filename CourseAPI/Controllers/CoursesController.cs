@@ -7,11 +7,11 @@ namespace CourseAPI.Controllers
 {
     [Route("api/courses")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class CourseController : ControllerBase
     {
         private readonly CourseService _courseService;
 
-        public BooksController(CourseService courseService)
+        public CourseController(CourseService courseService)
         {
             _courseService = courseService;
         }
