@@ -7,9 +7,9 @@ namespace Project.BusinessLayer
 {
     public class LaboratoriesRepository : ILaboratoriesRepository
     {
-        private readonly LaboratoriesContext context;
+        private readonly ApplicationContext context;
 
-        public LaboratoriesRepository(LaboratoriesContext context)
+        public LaboratoriesRepository(ApplicationContext context)
         {
             this.context = context;
         }

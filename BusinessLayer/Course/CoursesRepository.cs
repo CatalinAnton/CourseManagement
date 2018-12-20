@@ -7,9 +7,9 @@ namespace Project.BusinessLayer
 {
     public class CourseRepository : ICourseRepository
     {
-        private readonly CourseContext context;
+        private readonly ApplicationContext context;
 
-        public CourseRepository(CourseContext context)
+        public CourseRepository(ApplicationContext context)
         {
             this.context = context;
         }

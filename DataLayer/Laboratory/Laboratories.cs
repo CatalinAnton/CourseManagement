@@ -8,6 +8,7 @@ namespace Project.DataLayer
         
         public Laboratories()
         {
+
         }
     }
 }
