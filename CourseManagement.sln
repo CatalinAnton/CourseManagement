@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{2C57E1FC-DDBF-4BF1-8056-DC05EF51053C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthAPI", "AuthAPI\AuthAPI.csproj", "{DECF50E0-C82C-489A-97AC-209DE888B162}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI", "AuthAPI\AuthAPI.csproj", "{DECF50E0-C82C-489A-97AC-209DE888B162}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseAPI", "CourseAPI\CourseAPI.csproj", "{427F6776-0079-49EF-96A9-4F1F52B6A62F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseAPI", "CourseAPI\CourseAPI.csproj", "{427F6776-0079-49EF-96A9-4F1F52B6A62F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourseAPI", "ResourseAPI\ResourseAPI.csproj", "{05C53C50-0E5E-4A58-AA27-E757A812E909}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,18 @@ Global
 		{427F6776-0079-49EF-96A9-4F1F52B6A62F}.Release|x64.Build.0 = Release|Any CPU
 		{427F6776-0079-49EF-96A9-4F1F52B6A62F}.Release|x86.ActiveCfg = Release|Any CPU
 		{427F6776-0079-49EF-96A9-4F1F52B6A62F}.Release|x86.Build.0 = Release|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Debug|x64.Build.0 = Debug|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Debug|x86.Build.0 = Debug|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Release|x64.ActiveCfg = Release|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Release|x64.Build.0 = Release|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Release|x86.ActiveCfg = Release|Any CPU
+		{05C53C50-0E5E-4A58-AA27-E757A812E909}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
