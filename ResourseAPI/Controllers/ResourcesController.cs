@@ -7,11 +7,11 @@ namespace ResourseAPI.Controllers
 {
     [Route("api/resourses")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class ResourceController : ControllerBase
     {
         private readonly ResourseService _resourseService;
 
-        public BooksController(ResourseService resourseService)
+        public ResourceController(ResourseService resourseService)
         {
             _resourseService = resourseService;
         }
