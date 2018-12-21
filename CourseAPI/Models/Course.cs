@@ -5,15 +5,15 @@ namespace CourseAPI.Models
 {
     public class Course
     {
-        public ObjectId _id { get; set; }
+        public ObjectId _id { get; private set; }
 
-        [BsonElement("Year")]
-        public string Year { get; set; }
+        [BsonElement("title")]
+        public string Title { get; private set; }
 
-        [BsonElement("Semester")]
-        public string Semester { get; set; }
+        [BsonElement("description")]
+        public string Description { get; private set; }
 
-        [BsonElement("Title")]
-        public string Title { get; set; }
+        [BsonElement("date")]
+        public string Date { get; private set; }
     }
 }

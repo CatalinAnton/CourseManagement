@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   Button,
   Modal,
@@ -12,9 +13,12 @@ import {
   FormText
 } from 'reactstrap'
 
+import { promiseDispatch } from '../../common'
+import { getResources, postResource } from '../../resources'
+
 class ResourceModal extends Component {
   initialState = {
-    name: '',
+    title: '',
     description: '',
     file: '',
     modal: false
@@ -39,13 +43,20 @@ class ResourceModal extends Component {
     })
   }
 
-  submitForm = () => {
-    alert('a dat submit, am ajuns aici')
-    this.setState({ ...this.initialState })
+  submitForm = async () => {
+    const { getResources, postResource } = this.props
+    const { title, description, file } = this.state
+    try {
+      await promiseDispatch(postResource, { title, description, file, type: 'file' })
+      await promiseDispatch(getResources)
+      this.setState({ ...this.initialState })
+    } catch (error) {
+      console.log('Error on UI while submitting form', error)
+    }
   }
 
   render() {
-    const { name, description, modal } = this.state
+    const { title, description, modal } = this.state
     return (
       <div>
         <Button color="link" onClick={this.toggle(true)}>
@@ -60,23 +71,23 @@ class ResourceModal extends Component {
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="resourceName">Link</Label>
+                <Label for="resourceName">Resource name</Label>
                 <Input
                   type="text"
                   name="resourceName"
                   id="link"
                   placeholder="Resource name"
-                  onChange={this.changeField('name')}
-                  value={name}
+                  onChange={this.changeField('title')}
+                  value={title}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="fileDescription">Description</Label>
+                <Label for="fileDescription">Resource description</Label>
                 <Input
                   type="textarea"
                   name="description"
                   id="fileDescription"
-                  placeholder="File description"
+                  placeholder="Resource description"
                   onChange={this.changeField('description')}
                   value={description}
                 />
@@ -97,7 +108,7 @@ class ResourceModal extends Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle(false)}>
+            <Button color="primary" onClick={this.submitForm}>
               Done
             </Button>{' '}
             <Button color="secondary" onClick={this.toggle(false)}>
@@ -110,4 +121,12 @@ class ResourceModal extends Component {
   }
 }
 
-export default ResourceModal
+const mapDispatchToProps = {
+  getResources,
+  postResource
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ResourceModal)

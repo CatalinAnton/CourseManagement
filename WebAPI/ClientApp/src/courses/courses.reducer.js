@@ -1,15 +1,15 @@
-import { SET_RESOURCES } from './resources.constants'
+import { SET_COURSES } from './courses.constants'
 
 const initialState = {
-  resources: {}
+  courses: {}
 }
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_RESOURCES:
+    case SET_COURSES:
       return {
         ...state,
-        resources: action.payload.resources
+        courses: action.payload.courses
       }
     default:
       return state

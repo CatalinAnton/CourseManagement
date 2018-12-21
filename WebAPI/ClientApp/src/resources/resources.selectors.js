@@ -1,1 +1,1 @@
-export const selectAuthentified = state => state.auth.authentified
+export const selectResources = state => state.resources.resources

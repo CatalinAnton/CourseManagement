@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   Button,
   Modal,
@@ -11,13 +12,17 @@ import {
   Input
 } from 'reactstrap'
 
+import { promiseDispatch } from '../../common'
+import { getCourses, postCourse } from '../../courses'
+
 class CourseModal extends Component {
-  state = {
+  initialState = {
     title: '',
     description: '',
     date: '',
     modal: false
   }
+  state = { ...this.initialState }
 
   toggle = value => () => {
     this.setState({
@@ -31,7 +36,16 @@ class CourseModal extends Component {
     })
   }
 
-  submitForm = () => {
+  submitForm = async () => {
+    const { getCourses, postCourse } = this.props
+    const { title, description, date } = this.state
+    try {
+      await promiseDispatch(postCourse, { title, description, date })
+      await promiseDispatch(getCourses)
+      this.setState({ ...this.initialState })
+    } catch (error) {
+      console.log('Error on UI while submitting form', error)
+    }
   }
 
   render() {
@@ -98,4 +112,12 @@ class CourseModal extends Component {
   }
 }
 
-export default CourseModal
+const mapDispatchToProps = {
+  getCourses,
+  postCourse
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CourseModal)

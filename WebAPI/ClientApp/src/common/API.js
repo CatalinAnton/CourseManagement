@@ -5,7 +5,6 @@ export default (() => {
 
   const Fetch = (method, location, body = undefined) => {
     const response = fetch(
-      // location[0] === '/' ? `https://localhost:5001${location}` : location,
       location,
       {
         method,

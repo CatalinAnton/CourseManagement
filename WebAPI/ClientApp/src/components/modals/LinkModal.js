@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   Button,
   Modal,
@@ -11,13 +12,17 @@ import {
   Input
 } from 'reactstrap'
 
+import { promiseDispatch } from '../../common'
+import { getResources, postResource } from '../../resources'
+
 class LinkModal extends Component {
-  state = {
+  initialState = {
     title: '',
     description: '',
     link: '',
     modal: false
   }
+  state = { ...this.initialState }
 
   toggle = value => () => {
     this.setState({
@@ -31,8 +36,16 @@ class LinkModal extends Component {
     })
   }
 
-  submitForm = () => {
-    alert('a dat submit, am ajuns aici')
+  submitForm = async () => {
+    const { getResources, postResource } = this.props
+    const { title, description, link } = this.state
+    try {
+      await promiseDispatch(postResource, { title, description, link, type: 'link' })
+      await promiseDispatch(getResources)
+      this.setState({ ...this.initialState })
+    } catch (error) {
+      console.log('Error on UI while submitting form', error)
+    }
   }
 
   render() {
@@ -53,34 +66,34 @@ class LinkModal extends Component {
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="link">Link</Label>
+                <Label for="title">Title</Label>
                 <Input
                   type="text"
                   name="title"
-                  id="link"
-                  placeholder="Course title"
+                  id="title"
+                  placeholder="Resource title"
                   onChange={this.changeField('title')}
                   value={title}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="linkDescription">Description</Label>
+                <Label for="linkDescription">Resource description</Label>
                 <Input
                   type="textarea"
                   name="description"
                   id="linkDescription"
-                  placeholder="Course description"
+                  placeholder="Resource description"
                   onChange={this.changeField('description')}
                   value={description}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="placeholderLink">Link placeholder (optional)</Label>
+                <Label for="placeholderLink">Resource link</Label>
                 <Input
                   type="text"
                   name="date"
                   id="placeholderLink"
-                  placeholder="link placeholder"
+                  placeholder="Resource link"
                   onChange={this.changeField('link')}
                   value={link}
                 />
@@ -88,7 +101,7 @@ class LinkModal extends Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle(false)}>
+            <Button color="primary" onClick={this.submitForm}>
               Done
             </Button>{' '}
             <Button color="secondary" onClick={this.toggle(false)}>
@@ -101,4 +114,12 @@ class LinkModal extends Component {
   }
 }
 
-export default LinkModal
+const mapDispatchToProps = {
+  getResources,
+  postResource
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(LinkModal)
