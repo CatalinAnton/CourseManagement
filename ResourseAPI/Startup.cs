@@ -45,6 +45,11 @@ namespace ResourseAPI
             }
 
             app.UseHttpsRedirection();
+            app.UseCors(builder =>
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+            );
             app.UseMvc();
         }
     }

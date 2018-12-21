@@ -43,6 +43,11 @@ namespace CourseAPI
                 app.UseHsts();
             }
 
+            app.UseCors(builder =>
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+            );
             app.UseHttpsRedirection();
             app.UseMvc();
         }

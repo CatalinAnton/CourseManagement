@@ -1,6 +1,7 @@
 export default (() => {
   const headers = {
-    Authorization: ''
+    'Authorization': '',
+    'Content-Type': 'application/json'
   }
 
   const Fetch = (method, location, body = undefined) => {
@@ -10,7 +11,7 @@ export default (() => {
         method,
         headers,
         ...(body && { body }),
-        mode: 'cors',
+        mode: 'no-cors',
         credentials: 'include'
       }
     )
@@ -22,7 +23,7 @@ export default (() => {
     }
   }
 
-  const GET = location => Fetch('GET', location)
+  const GET = (location) => Fetch('GET', location)
 
   const POST = (location, body) => Fetch('POST', location, body)
 

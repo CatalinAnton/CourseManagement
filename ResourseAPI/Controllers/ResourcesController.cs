@@ -36,7 +36,7 @@ namespace ResourseAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Resourse> Create(Resourse resourse)
+        public ActionResult<Resourse> Create([FromForm] Resourse resourse)
         {
             _resourseService.Create(resourse);
 
