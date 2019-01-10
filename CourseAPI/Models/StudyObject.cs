@@ -1,10 +1,11 @@
+﻿using AuthAPI.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
 namespace CourseAPI.Models
 {
-    public class Course
+    public class StudyObject
     {
         public ObjectId _id { get; set; }
 
@@ -17,7 +18,7 @@ namespace CourseAPI.Models
         [BsonElement("Title")]
         public string Title { get; set; }
 
-        [BsonElement("Sessions")]
-        public List<Session> Sessions { get; set; }
+        [BsonElement("Teacher")]
+        public User Teacher { get; set; }
     }
 }
