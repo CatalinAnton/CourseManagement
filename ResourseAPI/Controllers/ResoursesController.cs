@@ -38,7 +38,7 @@ namespace ResourseAPI.Controllers
         [HttpPost]
         public ActionResult<Resourse> Create(Resourse resourse)
         {
-            _resourseService.Create(resourse);
+           _resourseService.Create(resourse);     
 
             return CreatedAtRoute("GetResourse", new { id = resourse._id.ToString() }, resourse);
         }

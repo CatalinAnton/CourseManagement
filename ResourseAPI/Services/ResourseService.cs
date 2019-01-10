@@ -25,9 +25,7 @@ namespace ResourseAPI.Services
 
         public Resourse Get(string id)
         {
-            var docId = new ObjectId(id);
-
-            return _resourses.Find<Resourse>(resourse => resourse._id == docId).FirstOrDefault();
+            return _resourses.Find<Resourse>(resourse => resourse._id == id).FirstOrDefault();
         }
 
         public Resourse Create(Resourse resourse)
@@ -38,9 +36,7 @@ namespace ResourseAPI.Services
 
         public void Update(string id, Resourse resourseIn)
         {
-            var docId = new ObjectId(id);
-
-            _resourses.ReplaceOne(resourse => resourse._id == docId, resourseIn);
+            _resourses.ReplaceOne(resourse => resourse._id == id, resourseIn);
         }
 
         public void Remove(Resourse resourseIn)
@@ -48,7 +44,7 @@ namespace ResourseAPI.Services
             _resourses.DeleteOne(resourse => resourse._id == resourseIn._id);
         }
 
-        public void Remove(ObjectId id)
+        public void Remove(string id)
         {
             _resourses.DeleteOne(resourse => resourse._id == id);
         }
