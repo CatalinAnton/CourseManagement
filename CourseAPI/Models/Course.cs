@@ -1,10 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-<<<<<<< HEAD
 using System.Collections.Generic;
-=======
 using System.ComponentModel.DataAnnotations;
->>>>>>> 791f757b001f87907fd064e94a2e1ca3f1907c61
 
 namespace CourseAPI.Models
 {
