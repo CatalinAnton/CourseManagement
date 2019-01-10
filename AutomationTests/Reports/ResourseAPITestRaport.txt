@@ -1,0 +1,45 @@
+TestCase [TestCase1: return all resourses (200 OK)] started at 2019-01-10 22:15:45.430
+TestCase [TestCase1: return all resourses (200 OK)] finished with status [FINISHED], time taken = 40
+TestCase [TestCase2: return all resourses (404 not found)] started at 2019-01-10 22:15:45.492
+TestCase [TestCase2: return all resourses (404 not found)] finished with status [FINISHED], time taken = 6
+Step 1 [GET all resourses] OK: took 40 ms
+TestCase [TestCase3: create a resourse] started at 2019-01-10 22:15:45.501
+Step 1 [GET all resourses] OK: took 6 ms
+Step 2 [POST create a resourse] OK: took 194 ms
+Step 3 [Set resourse id] OK: took 0 ms
+TestCase [TestCase3: create a resourse] finished with status [FINISHED], time taken = 277
+TestCase [TestCase4: validation "Link" field is required] started at 2019-01-10 22:15:45.788
+Step 1 [DELETE the resourse by id] OK: took 83 ms
+TestCase [TestCase4: validation "Link" field is required] finished with status [FINISHED], time taken = 7
+TestCase [TestCase5: validation "Type" field is required] started at 2019-01-10 22:15:45.801
+Step 1 [POST create a resourse] OK: took 7 ms
+TestCase [TestCase5: validation "Type" field is required] finished with status [FINISHED], time taken = 4
+TestCase [TestCase6: create a resourse (404 not found)] started at 2019-01-10 22:15:45.809
+TestCase [TestCase6: create a resourse (404 not found)] finished with status [FINISHED], time taken = 4
+Step 1 [POST create a resourse'] OK: took 4 ms
+TestCase [TestCase7: return a resourse by a valid id] started at 2019-01-10 22:15:45.817
+Step 1 [POST create a resourse] OK: took 4 ms
+Step 2 [POST create a resourse] OK: took 5 ms
+Step 3 [Set resourse id] OK: took 0 ms
+TestCase [TestCase7: return a resourse by a valid id] finished with status [FINISHED], time taken = 16
+TestCase [TestCase8: return a resourse by an invalid id (because  the number of characters)] started at 2019-01-10 22:15:45.843
+Step 1 [GET the resourse by id] OK: took 7 ms
+TestCase [TestCase8: return a resourse by an invalid id (because  the number of characters)] finished with status [FINISHED], time taken = 3
+TestCase [TestCase9: return a resourse by a non-existent id in DB] started at 2019-01-10 22:15:45.849
+Step 1 [DELETE the resourse by id] OK: took 4 ms
+TestCase [TestCase9: return a resourse by a non-existent id in DB] finished with status [FINISHED], time taken = 4
+Step 2 [Set resourse id] OK: took 0 ms
+TestCase [TestCase10: delete a resourse by a valid id] started at 2019-01-10 22:15:45.858
+Step 1 [GET the resourse by id] OK: took 3 ms
+Step 2 [Set resourse id] OK: took 0 ms
+Step 3 [GET the resourse by id] OK: took 4 ms
+TestCase [TestCase10: delete a resourse by a valid id] finished with status [FINISHED], time taken = 8
+TestCase [TestCase11: delete a resourse by an invalid id (because the number of characters)] started at 2019-01-10 22:15:45.872
+Step 1 [POST create a resourse] OK: took 4 ms
+TestCase [TestCase11: delete a resourse by an invalid id (because the number of characters)] finished with status [FINISHED], time taken = 3
+Step 2 [Set resourse id] OK: took 0 ms
+TestCase [TestCase12: delete a resourse by a non-existing id (in DB)] started at 2019-01-10 22:15:45.878
+Step 1 [DELETE the resourse by id] OK: took 4 ms
+TestCase [TestCase12: delete a resourse by a non-existing id (in DB)] finished with status [FINISHED], time taken = 5
+Step 2 [DELETE the resourse by id] OK: took 3 ms
+Step 3 [DELETE the resourse by id] OK: took 5 ms

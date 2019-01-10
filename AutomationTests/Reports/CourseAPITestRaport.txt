@@ -1,0 +1,48 @@
+TestCase [TestCase1: return all courses (200 OK)] started at 2019-01-10 22:13:55.356
+TestCase [TestCase1: return all courses (200 OK)] finished with status [FINISHED], time taken = 7
+TestCase [TestCase2: return all courses (404 not found)] started at 2019-01-10 22:13:55.377
+Step 1 [GET all courses] OK: took 7 ms
+TestCase [TestCase2: return all courses (404 not found)] finished with status [FINISHED], time taken = 5
+TestCase [TestCase3: create a course] started at 2019-01-10 22:13:55.387
+Step 1 [GET all courses] OK: took 5 ms
+TestCase [TestCase3: create a course] finished with status [FINISHED], time taken = 9
+Step 2 [POST create a course] OK: took 4 ms
+TestCase [TestCase4: validation "Year" field is required] started at 2019-01-10 22:13:55.405
+Step 1 [Set course id] OK: took 0 ms
+Step 2 [DELETE the course by id] OK: took 5 ms
+TestCase [TestCase4: validation "Year" field is required] finished with status [FINISHED], time taken = 4
+TestCase [TestCase5: validation "Semester" field is required] started at 2019-01-10 22:13:55.415
+Step 1 [POST create a course] OK: took 4 ms
+TestCase [TestCase5: validation "Semester" field is required] finished with status [FINISHED], time taken = 4
+TestCase [TestCase6: validation "Title" field is required] started at 2019-01-10 22:13:55.424
+TestCase [TestCase6: validation "Title" field is required] finished with status [FINISHED], time taken = 4
+Step 1 [POST create a course] OK: took 4 ms
+TestCase [TestCase7: create a course (404 not found)] started at 2019-01-10 22:13:55.434
+Step 1 [POST create a course] OK: took 4 ms
+TestCase [TestCase7: create a course (404 not found)] finished with status [FINISHED], time taken = 2
+TestCase [TestCase8: return a course by a valid id] started at 2019-01-10 22:13:55.440
+Step 1 [POST create a course] OK: took 2 ms
+Step 2 [POST create a course] OK: took 4 ms
+Step 3 [Set course id] OK: took 0 ms
+TestCase [TestCase8: return a course by a valid id] finished with status [FINISHED], time taken = 12
+TestCase [TestCase9: return a course by an invalid id (because  the number of characters)] started at 2019-01-10 22:13:55.464
+Step 1 [GET the course by id] OK: took 4 ms
+TestCase [TestCase9: return a course by an invalid id (because  the number of characters)] finished with status [FINISHED], time taken = 2
+TestCase [TestCase10: return a course by a non-existent id in DB] started at 2019-01-10 22:13:55.469
+Step 1 [DELETE the course by id] OK: took 4 ms
+Step 2 [Set course id] OK: took 0 ms
+TestCase [TestCase10: return a course by a non-existent id in DB] finished with status [FINISHED], time taken = 4
+TestCase [TestCase11: delete a course by a valid id] started at 2019-01-10 22:13:55.476
+Step 1 [GET the course by id] OK: took 2 ms
+Step 2 [Set course id] OK: took 0 ms
+Step 3 [GET the course by id] OK: took 4 ms
+TestCase [TestCase11: delete a course by a valid id] finished with status [FINISHED], time taken = 8
+TestCase [TestCase12: delete a course by an invalid id (because the number of characters)] started at 2019-01-10 22:13:55.491
+Step 1 [POST create a course] OK: took 4 ms
+Step 2 [Set course id] OK: took 0 ms
+TestCase [TestCase12: delete a course by an invalid id (because the number of characters)] finished with status [FINISHED], time taken = 2
+TestCase [TestCase13: delete a course by a non-existing id (in DB)] started at 2019-01-10 22:13:55.497
+Step 1 [DELETE the course by id] OK: took 4 ms
+TestCase [TestCase13: delete a course by a non-existing id (in DB)] finished with status [FINISHED], time taken = 3
+Step 2 [DELETE the course by id] OK: took 2 ms
+Step 3 [DELETE the course by id] OK: took 3 ms
