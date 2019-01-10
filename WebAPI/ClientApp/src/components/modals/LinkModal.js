@@ -17,9 +17,9 @@ import { getResources, postResource } from '../../resources'
 
 class LinkModal extends Component {
   initialState = {
-    title: '',
-    description: '',
-    link: '',
+    Title: '',
+    Description: '',
+    Link: '',
     modal: false
   }
   state = { ...this.initialState }
@@ -38,9 +38,9 @@ class LinkModal extends Component {
 
   submitForm = async () => {
     const { getResources, postResource } = this.props
-    const { title, description, link } = this.state
+    const { Title, Description, Link } = this.state
     try {
-      await promiseDispatch(postResource, { title, description, link, type: 'link' })
+      await promiseDispatch(postResource, { Title, Description, Link, Type: 'link' })
       await promiseDispatch(getResources)
       this.setState({ ...this.initialState })
     } catch (error) {
@@ -49,7 +49,7 @@ class LinkModal extends Component {
   }
 
   render() {
-    const { title, description, link, modal } = this.state
+    const { Title, Description, Link, modal } = this.state
     return (
       <div>
         <Button color="link" onClick={this.toggle(true)}>
@@ -72,8 +72,8 @@ class LinkModal extends Component {
                   name="title"
                   id="title"
                   placeholder="Resource title"
-                  onChange={this.changeField('title')}
-                  value={title}
+                  onChange={this.changeField('Title')}
+                  value={Title}
                 />
               </FormGroup>
               <FormGroup>
@@ -83,8 +83,8 @@ class LinkModal extends Component {
                   name="description"
                   id="linkDescription"
                   placeholder="Resource description"
-                  onChange={this.changeField('description')}
-                  value={description}
+                  onChange={this.changeField('Description')}
+                  value={Description}
                 />
               </FormGroup>
               <FormGroup>
@@ -94,8 +94,8 @@ class LinkModal extends Component {
                   name="date"
                   id="placeholderLink"
                   placeholder="Resource link"
-                  onChange={this.changeField('link')}
-                  value={link}
+                  onChange={this.changeField('Link')}
+                  value={Link}
                 />
               </FormGroup>
             </Form>

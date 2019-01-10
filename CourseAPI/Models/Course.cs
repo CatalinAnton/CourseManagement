@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CourseAPI.Models
@@ -19,5 +20,8 @@ namespace CourseAPI.Models
         [BsonElement("Title")]
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
+
+        [BsonElement("Sessions")]
+        public List<Session> Sessions { get; set; }
     }
 }

@@ -1,1 +1,2 @@
-export { default as Domain } from './Domain'
+export { default as Home } from './Home'
+export { default as TeacherCourses } from './TeacherCourses'

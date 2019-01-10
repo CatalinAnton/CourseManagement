@@ -17,9 +17,10 @@ import { getCourses, postCourse } from '../../courses'
 
 class CourseModal extends Component {
   initialState = {
-    title: '',
-    description: '',
-    date: '',
+    Title: '',
+    Description: '',
+    Semester: '',
+    Year: '',
     modal: false
   }
   state = { ...this.initialState }
@@ -38,9 +39,9 @@ class CourseModal extends Component {
 
   submitForm = async () => {
     const { getCourses, postCourse } = this.props
-    const { title, description, date } = this.state
+    const { Title, Description, date } = this.state
     try {
-      await promiseDispatch(postCourse, { title, description, date })
+      await promiseDispatch(postCourse, { Title, Description, date })
       await promiseDispatch(getCourses)
       this.setState({ ...this.initialState })
     } catch (error) {
@@ -49,7 +50,7 @@ class CourseModal extends Component {
   }
 
   render() {
-    const { title, description, date, modal } = this.state
+    const { Title, Description, Semester, Year, modal } = this.state
     return (
       <div>
         <Button color="success" onClick={this.toggle(true)}>
@@ -70,8 +71,8 @@ class CourseModal extends Component {
                   name="title"
                   id="courseTitle"
                   placeholder="Course title"
-                  onChange={this.changeField('title')}
-                  value={title}
+                  onChange={this.changeField('Title')}
+                  value={Title}
                 />
               </FormGroup>
               <FormGroup>
@@ -81,19 +82,28 @@ class CourseModal extends Component {
                   name="description"
                   id="courseDescription"
                   placeholder="Course description"
-                  onChange={this.changeField('description')}
-                  value={description}
+                  onChange={this.changeField('Description')}
+                  value={Description}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="courseDate">Date</Label>
+                <Label for="courseSemester">Semester</Label>
                 <Input
-                  type="date"
-                  name="date"
-                  id="courseDate"
-                  placeholder="date placeholder"
-                  onChange={this.changeField('date')}
-                  value={date}
+                  type="textarea"
+                  placeholder="Semester"
+                  id="courseSemester"
+                  onChange={this.changeField('Semester')}
+                  value={Semester}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="courseYear">Year</Label>
+                <Input
+                  type="textarea"
+                  placeholder="Year"
+                  id="courseYear"
+                  onChange={this.changeField('Year')}
+                  value={Year}
                 />
               </FormGroup>
             </Form>

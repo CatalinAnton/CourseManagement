@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using CourseAPI.Models;
 using CourseAPI.Services;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc; 
 
 namespace CourseAPI.Controllers
 {
     [Route("api/courses")]
+    [EnableCors("AllowSpecificOrigin")]
     [ApiController]
     public class CourseController : ControllerBase
     {

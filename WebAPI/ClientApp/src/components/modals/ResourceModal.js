@@ -18,9 +18,9 @@ import { getResources, postResource } from '../../resources'
 
 class ResourceModal extends Component {
   initialState = {
-    title: '',
-    description: '',
-    file: '',
+    Title: '',
+    Description: '',
+    File: '',
     modal: false
   }
   state = { ...this.initialState }
@@ -39,15 +39,15 @@ class ResourceModal extends Component {
 
   changeFiles = event => {
     this.setState({
-      file: event.target.files
+      File: event.target.files
     })
   }
 
   submitForm = async () => {
     const { getResources, postResource } = this.props
-    const { title, description, file } = this.state
+    const { Title, Description, File } = this.state
     try {
-      await promiseDispatch(postResource, { title, description, file, type: 'file' })
+      await promiseDispatch(postResource, { Title, Description, File, Type: 'file' })
       await promiseDispatch(getResources)
       this.setState({ ...this.initialState })
     } catch (error) {
@@ -56,7 +56,7 @@ class ResourceModal extends Component {
   }
 
   render() {
-    const { title, description, modal } = this.state
+    const { Title, Description, modal } = this.state
     return (
       <div>
         <Button color="link" onClick={this.toggle(true)}>
@@ -77,8 +77,8 @@ class ResourceModal extends Component {
                   name="resourceName"
                   id="link"
                   placeholder="Resource name"
-                  onChange={this.changeField('title')}
-                  value={title}
+                  onChange={this.changeField('Title')}
+                  value={Title}
                 />
               </FormGroup>
               <FormGroup>
@@ -88,8 +88,8 @@ class ResourceModal extends Component {
                   name="description"
                   id="fileDescription"
                   placeholder="Resource description"
-                  onChange={this.changeField('description')}
-                  value={description}
+                  onChange={this.changeField('Description')}
+                  value={Description}
                 />
               </FormGroup>
               <FormGroup>
