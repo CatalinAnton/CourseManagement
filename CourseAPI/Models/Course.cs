@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace CourseAPI.Models
 {
@@ -7,13 +8,16 @@ namespace CourseAPI.Models
     {
         public ObjectId _id { get; private set; }
 
-        [BsonElement("title")]
-        public string Title { get; private set; }
+        [BsonElement("Year")]
+        [Required(ErrorMessage = "Year is required")]
+        public string Year { get; set; }
 
-        [BsonElement("description")]
-        public string Description { get; private set; }
+        [BsonElement("Semester")]
+        [Required(ErrorMessage = "Semester is required")]
+        public string Semester { get; set; }
 
-        [BsonElement("date")]
-        public string Date { get; private set; }
+        [BsonElement("Title")]
+        [Required(ErrorMessage = "Title is required")]
+        public string Title { get; set; }
     }
 }

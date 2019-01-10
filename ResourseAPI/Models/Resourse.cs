@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace ResourseAPI.Models
 {
@@ -9,11 +9,13 @@ namespace ResourseAPI.Models
 
         public ObjectId _id { get; private set; }
 
-        [BsonElement("title")]
-        public string Title { get; private set; }
+        [BsonElement("Type")]
+        [Required(ErrorMessage = "Type is required")]
+        public string Type { get; set; }
 
-        [BsonElement("description")]
-        public string Description { get; private set; }
+        [BsonElement("Link")]
+        [Required(ErrorMessage = "Link is required")]
+        public string Link { get; set; }
 
         [BsonElement("type")]
         public string Type { get; private set; }
