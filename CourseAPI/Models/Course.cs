@@ -7,7 +7,7 @@ namespace CourseAPI.Models
 {
     public class Course
     {
-        public ObjectId _id { get; set; }
+        public ObjectId _id { get; private set; }
 
         [BsonElement("Year")]
         [Required(ErrorMessage = "Year is required")]
@@ -16,6 +16,10 @@ namespace CourseAPI.Models
         [BsonElement("Semester")]
         [Required(ErrorMessage = "Semester is required")]
         public string Semester { get; set; }
+
+        [BsonElement("Description")]
+        [Required(ErrorMessage = "Description is required")]
+        public string Description { get; set; }
 
         [BsonElement("Title")]
         [Required(ErrorMessage = "Title is required")]
