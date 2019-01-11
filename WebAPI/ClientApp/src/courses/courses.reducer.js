@@ -1,7 +1,7 @@
 import { SET_COURSES } from './courses.constants'
 
 const initialState = {
-  courses: {}
+  courses: []
 }
 
 export default (state = initialState, action = {}) => {

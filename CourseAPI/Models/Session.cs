@@ -1,5 +1,4 @@
-﻿using AuthAPI.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -11,7 +10,6 @@ namespace CourseAPI.Models
 {
     public class Session
     {
-        
         public ObjectId _id { get; set; }
 
         [BsonElement("Attendace")]

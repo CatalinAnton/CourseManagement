@@ -3,7 +3,7 @@ import { GET_COURSES, POST_COURSE } from './courses.constants'
 import { setCourses } from './courses.actions'
 import { getCourses, postCourse } from './courses.dataservice'
 
-function* getCoursesSaga(action) {
+function * getCoursesSaga (action) {
   const { resolve, reject } = action.payload
   const response = yield call(getCourses)
   if (response.status === 200) {
@@ -14,7 +14,7 @@ function* getCoursesSaga(action) {
   }
 }
 
-function* postCourseSaga(action) {
+function * postCourseSaga (action) {
   const { course, resolve, reject } = action.payload
   const response = yield call(postCourse, course)
   if (response.status === 200) {
@@ -24,7 +24,7 @@ function* postCourseSaga(action) {
   }
 }
 
-export default function* courses() {
+export default function * courses () {
   yield takeLatest(GET_COURSES, getCoursesSaga)
   yield takeLatest(POST_COURSE, postCourseSaga)
 }

@@ -28,6 +28,11 @@ namespace ResourseAPI.Services
             return _resourses.Find<Resourse>(resourse => resourse._id == id).FirstOrDefault();
         }
 
+        public List<Resourse> GetByCourseId(string id)
+        {
+            return _resourses.Find<Resourse>(resourse => resourse.CourseId == id).ToList();
+        }
+
         public Resourse Create(Resourse resourse)
         {
             _resourses.InsertOne(resourse);

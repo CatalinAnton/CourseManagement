@@ -17,6 +17,10 @@ namespace CourseAPI.Models
         [Required(ErrorMessage = "Semester is required")]
         public string Semester { get; set; }
 
+        [BsonElement("Description")]
+        [Required(ErrorMessage = "Description is required")]
+        public string Description { get; set; }
+
         [BsonElement("Title")]
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }

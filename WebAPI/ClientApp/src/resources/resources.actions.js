@@ -4,14 +4,14 @@ import {
   POST_RESOURCE
 } from './resources.constants'
 
-export const getResources = (payload, resolve, reject) => ({
+export const getResources = ({ courseId }, resolve, reject) => ({
   type: GET_RESOURCES,
-  payload: { resolve, reject }
+  payload: { courseId, resolve, reject }
 })
 
-export const setResources = resources => ({
+export const setResources = (courseId, resources) => ({
   type: SET_RESOURCES,
-  payload: { resources }
+  payload: { courseId, resources }
 })
 
 export const postResource = (resource, resolve, reject) => ({

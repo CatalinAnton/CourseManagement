@@ -37,10 +37,16 @@ class LinkModal extends Component {
   }
 
   submitForm = async () => {
-    const { getResources, postResource } = this.props
+    const { courseId, getResources, postResource } = this.props
     const { Title, Description, Link } = this.state
     try {
-      await promiseDispatch(postResource, { Title, Description, Link, Type: 'link' })
+      await promiseDispatch(postResource, {
+        Title,
+        Description,
+        Link,
+        CourseId: courseId,
+        Type: 'link'
+      })
       await promiseDispatch(getResources)
       this.setState({ ...this.initialState })
     } catch (error) {
@@ -48,13 +54,11 @@ class LinkModal extends Component {
     }
   }
 
-  render() {
+  render () {
     const { Title, Description, Link, modal } = this.state
     return (
       <div>
-        <Button color="link" onClick={this.toggle(true)}>
-          Add Link
-        </Button>
+        <Button onClick={this.toggle(true)}>Add Link</Button>
         <Modal
           isOpen={modal}
           toggle={this.toggle(false)}
@@ -66,34 +70,34 @@ class LinkModal extends Component {
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="title">Title</Label>
+                <Label for='title'>Title</Label>
                 <Input
-                  type="text"
-                  name="title"
-                  id="title"
-                  placeholder="Resource title"
+                  type='text'
+                  name='title'
+                  id='title'
+                  placeholder='Resource title'
                   onChange={this.changeField('Title')}
                   value={Title}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="linkDescription">Resource description</Label>
+                <Label for='linkDescription'>Resource description</Label>
                 <Input
-                  type="textarea"
-                  name="description"
-                  id="linkDescription"
-                  placeholder="Resource description"
+                  type='textarea'
+                  name='description'
+                  id='linkDescription'
+                  placeholder='Resource description'
                   onChange={this.changeField('Description')}
                   value={Description}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="placeholderLink">Resource link</Label>
+                <Label for='placeholderLink'>Resource link</Label>
                 <Input
-                  type="text"
-                  name="date"
-                  id="placeholderLink"
-                  placeholder="Resource link"
+                  type='text'
+                  name='date'
+                  id='placeholderLink'
+                  placeholder='Resource link'
                   onChange={this.changeField('Link')}
                   value={Link}
                 />
@@ -101,10 +105,10 @@ class LinkModal extends Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.submitForm}>
+            <Button color='primary' onClick={this.submitForm}>
               Done
             </Button>{' '}
-            <Button color="secondary" onClick={this.toggle(false)}>
+            <Button color='secondary' onClick={this.toggle(false)}>
               Cancel
             </Button>
           </ModalFooter>

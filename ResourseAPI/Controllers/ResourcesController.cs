@@ -21,28 +21,29 @@ namespace ResourseAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Resourse>> Get()
+        public ActionResult<List<Resourse>> Get(string courseId)
         {
-            return _resourseService.Get();
-        }
-
-        [HttpGet("{id:length(24)}", Name = "GetResourse")]
-        public ActionResult<Resourse> Get(string id)
-        {
-            var resourse = _resourseService.Get(id);
-
-            if (resourse == null)
+            if (!courseId.Equals(""))
             {
-                return NotFound();
-            }
+                var resourse = _resourseService.GetByCourseId(courseId);
 
-            return resourse;
+                if (resourse == null)
+                {
+                    return NotFound();
+                }
+
+                return resourse;
+            }
+            else
+            {
+                return _resourseService.Get();
+            }
         }
 
         [HttpPost]
         public ActionResult<Resourse> Create([FromBody] Resourse resourse)
         {
-           _resourseService.Create(resourse);     
+            _resourseService.Create(resourse);
 
             return CreatedAtRoute("GetResourse", new { id = resourse._id.ToString() }, resourse);
         }

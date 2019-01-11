@@ -10,9 +10,9 @@ export default (() => {
       {
         method,
         headers,
-        ...(body && { body }),
-        mode: 'no-cors',
-        credentials: 'include'
+        ...(body && { body: JSON.stringify(body) }),
+        mode: 'cors',
+        credentials: 'same-origin'
       }
     )
 

@@ -1,24 +1,20 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, takeEvery, put, call } from 'redux-saga/effects'
 import { GET_RESOURCES, POST_RESOURCE } from './resources.constants'
 import { setResources } from './resources.actions'
 import { getResources, postResource } from './resources.dataservice'
 
-function* getResourcesSaga(action) {
-  const { resolve, reject } = action.payload
-  const response = yield call(getResources)
+function * getResourcesSaga (action) {
+  const { courseId, resolve, reject } = action.payload
+  const response = yield call(getResources, courseId)
   if (response.status === 200) {
-    let resources = {}
-    response.data.forEach(item => {
-      resources[item.CourseId] = item
-    })
-    yield put(setResources(resources))
+    yield put(setResources(courseId, response.data))
     resolve && resolve()
   } else {
     reject && reject()
   }
 }
 
-function* postResourceSaga(action) {
+function * postResourceSaga (action) {
   const { resource, resolve, reject } = action.payload
   const response = yield call(postResource, resource)
   if (response.status === 200) {
@@ -28,7 +24,7 @@ function* postResourceSaga(action) {
   }
 }
 
-export default function* resources() {
-  yield takeLatest(GET_RESOURCES, getResourcesSaga)
+export default function * resources () {
+  yield takeEvery(GET_RESOURCES, getResourcesSaga)
   yield takeLatest(POST_RESOURCE, postResourceSaga)
 }

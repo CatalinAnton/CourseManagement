@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import {
   Card,
   CardHeader,
-  CardFooter,
+  CardDeck,
   CardBody,
   CardTitle,
-  ListGroup,
-  ListGroupItem,
-  ListGroupItemHeading,
-  ListGroupItemText
+  CardText,
+  ButtonGroup
 } from 'reactstrap'
 import { connect } from 'react-redux'
+
 import { CourseModal, LinkModal, ResourceModal } from '../components'
-import { selectCourses, getCourses, postCourse } from '../courses'
+import { promiseDispatch } from '../common'
+import { selectCourses, getCourses } from '../courses'
+import { Resources } from '../resources'
 
 class TeacherCourses extends Component {
   state = {
@@ -23,7 +24,7 @@ class TeacherCourses extends Component {
   async componentDidMount () {
     const { getCourses } = this.props
     try {
-      await getCourses()
+      await promiseDispatch(getCourses)
     } catch (error) {
       console.log(error)
       this.setState({ error: 'Could not fetch data' })
@@ -35,68 +36,38 @@ class TeacherCourses extends Component {
     const { error, loading } = this.state
     const { courses } = this.props
 
-    if (loading) {
-      return (
-        <p>Loading...</p>
-      )
-    }
-    if (error) {
-      return (
-        <p>Something went wrong...</p>
-      )
-    }
+    if (error) return <p>Something went wrong... {error}</p>
+    if (loading) return <p>Loading...</p>
+
     return (
       <Card>
-        {/* {state.props.title} and so on to use fetched data  I GUESS :-? */}
-        <CardHeader>Machine Learning</CardHeader>
+        <CardHeader>
+          <CardTitle tag='h1'>Courses</CardTitle>
+        </CardHeader>
 
         <CardBody>
-          <CardTitle>Courses</CardTitle>
-          <ListGroup>
-            <ListGroupItem>
-              <ListGroupItemHeading>Course 1</ListGroupItemHeading>
-              <ListGroupItemText>
-                Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                diam eget risus varius blandit.
-              </ListGroupItemText>
-            </ListGroupItem>
-            <ListGroupItem>
-              <ListGroupItemHeading>Course 2</ListGroupItemHeading>
-              <ListGroupItemText>
-                Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                diam eget risus varius blandit.
-              </ListGroupItemText>
-            </ListGroupItem>
-            <ListGroupItem>
-              <ListGroupItemHeading>Course 3</ListGroupItemHeading>
-              <ListGroupItemText>
-                Donec id elit non mi porta gravida at eget metus. Maecenas sed
-                diam eget risus varius blandit.
-              </ListGroupItemText>
-              <ListGroup flush>
-                <p>References:</p>
-                <ListGroupItem tag='a' href='#'>
-                  Dapibus ac facilisis in
-                </ListGroupItem>
-                <ListGroupItem tag='a' href='#'>
-                  Morbi leo risus
-                </ListGroupItem>
-                <ListGroupItem tag='a' href='#'>
-                  Porta ac consectetur ac
-                </ListGroupItem>
-                <ListGroupItem tag='a' href='#'>
-                  Vestibulum at eros
-                </ListGroupItem>
-                <ListGroupItem>
-                  {' '}
-                  <LinkModal /> {' or '} <ResourceModal />{' '}
-                </ListGroupItem>
-              </ListGroup>
-            </ListGroupItem>
-          </ListGroup>
+          <CardDeck>
+            {courses.map(item => (
+              <Card key={item._id}>
+                <CardHeader>
+                  <CardTitle tag='h2'>{item.title}</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <CardTitle tag='h3'>Description</CardTitle>
+                  <CardText>{item.description}</CardText>
+                  <CardTitle tag='h3'>Resources</CardTitle>
+                  <Resources courseId={item._id} />
+                  <CardTitle tag='h3'>Controls</CardTitle>
+                  <ButtonGroup>
+                    <LinkModal courseId={item._id} />
+                    <ResourceModal courseId={item._id} />
+                  </ButtonGroup>
+                </CardBody>
+              </Card>
+            ))}
+          </CardDeck>
           <CourseModal />
         </CardBody>
-        <CardFooter>Footer</CardFooter>
       </Card>
     )
   }
@@ -107,8 +78,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  getCourses,
-  postCourse
+  getCourses
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeacherCourses)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TeacherCourses)

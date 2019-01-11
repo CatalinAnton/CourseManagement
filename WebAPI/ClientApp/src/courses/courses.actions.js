@@ -5,9 +5,9 @@ export const getCourses = (payload, resolve, reject) => ({
     payload: { resolve, reject }
   })
   
-  export const setCourses = resources => ({
+  export const setCourses = courses => ({
     type: SET_COURSES,
-    payload: { resources }
+    payload: { courses }
   })
   
   export const postCourse = (course, resolve, reject) => ({

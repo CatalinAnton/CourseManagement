@@ -9,7 +9,10 @@ export default (state = initialState, action = {}) => {
     case SET_RESOURCES:
       return {
         ...state,
-        resources: action.payload.resources
+        resources: {
+          ...state.resources,
+          [action.payload.courseId]: action.payload.resources
+        }
       }
     default:
       return state

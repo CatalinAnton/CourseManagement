@@ -59,7 +59,7 @@ class ResourceModal extends Component {
     const { Title, Description, modal } = this.state
     return (
       <div>
-        <Button color="link" onClick={this.toggle(true)}>
+        <Button onClick={this.toggle(true)}>
           Upload File
         </Button>
         <Modal

@@ -19,8 +19,8 @@ class CourseModal extends Component {
   initialState = {
     Title: '',
     Description: '',
-    Semester: '',
     Year: '',
+    Semester: '',
     modal: false
   }
   state = { ...this.initialState }
@@ -39,9 +39,9 @@ class CourseModal extends Component {
 
   submitForm = async () => {
     const { getCourses, postCourse } = this.props
-    const { Title, Description, date } = this.state
+    const { Title, Description, Year, Semester } = this.state
     try {
-      await promiseDispatch(postCourse, { Title, Description, date })
+      await promiseDispatch(postCourse, { Title, Description, Year, Semester })
       await promiseDispatch(getCourses)
       this.setState({ ...this.initialState })
     } catch (error) {
@@ -49,11 +49,11 @@ class CourseModal extends Component {
     }
   }
 
-  render() {
+  render () {
     const { Title, Description, Semester, Year, modal } = this.state
     return (
       <div>
-        <Button color="success" onClick={this.toggle(true)}>
+        <Button color='success' onClick={this.toggle(true)}>
           Add Course
         </Button>
         <Modal
@@ -65,54 +65,54 @@ class CourseModal extends Component {
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="courseTitle">Title</Label>
+                <Label for='courseTitle'>Title</Label>
                 <Input
-                  type="text"
-                  name="title"
-                  id="courseTitle"
-                  placeholder="Course title"
+                  type='text'
+                  name='title'
+                  id='courseTitle'
+                  placeholder='Course title'
                   onChange={this.changeField('Title')}
                   value={Title}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="courseDescription">Description</Label>
+                <Label for='courseDescription'>Description</Label>
                 <Input
-                  type="textarea"
-                  name="description"
-                  id="courseDescription"
-                  placeholder="Course description"
+                  type='textarea'
+                  name='description'
+                  id='courseDescription'
+                  placeholder='Course description'
                   onChange={this.changeField('Description')}
                   value={Description}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="courseSemester">Semester</Label>
+                <Label for='courseYear'>Year</Label>
                 <Input
-                  type="textarea"
-                  placeholder="Semester"
-                  id="courseSemester"
-                  onChange={this.changeField('Semester')}
-                  value={Semester}
+                  type='textarea'
+                  placeholder='Year'
+                  id='courseYear'
+                  onChange={this.changeField('Year')}
+                  value={Year}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="courseYear">Year</Label>
+                <Label for='courseSemester'>Semester</Label>
                 <Input
-                  type="textarea"
-                  placeholder="Year"
-                  id="courseYear"
-                  onChange={this.changeField('Year')}
-                  value={Year}
+                  type='textarea'
+                  placeholder='Semester'
+                  id='courseSemester'
+                  onChange={this.changeField('Semester')}
+                  value={Semester}
                 />
               </FormGroup>
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.submitForm}>
+            <Button color='primary' onClick={this.submitForm}>
               Done
             </Button>{' '}
-            <Button color="secondary" onClick={this.toggle(false)}>
+            <Button color='secondary' onClick={this.toggle(false)}>
               Cancel
             </Button>
           </ModalFooter>
