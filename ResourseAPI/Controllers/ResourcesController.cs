@@ -20,12 +20,22 @@ namespace ResourseAPI.Controllers
             _resourseService = resourseService;
         }
 
-        [HttpGet]
-        public ActionResult<List<Resourse>> Get(string courseId)
+        [HttpGet(Name = "Get")]
+        public ActionResult<List<Resourse>> Get(string id, string courseId)
         {
-            if (!courseId.Equals(""))
+            if ((id != null && !id.Equals("")) || (courseId != null && !courseId.Equals("")))
             {
-                var resourse = _resourseService.GetByCourseId(courseId);
+                List<Resourse> resourse = null;
+                if (id != null && !id.Equals(""))
+                {
+                    resourse = new List<Resourse>();
+                    Resourse resource = _resourseService.Get(id);
+                    if (resource != null) resourse.Add(resource);
+                }
+                else
+                {
+                    resourse = _resourseService.GetByCourseId(courseId);
+                }
 
                 if (resourse == null)
                 {
@@ -40,12 +50,25 @@ namespace ResourseAPI.Controllers
             }
         }
 
+        [HttpGet("{id:length(24)}", Name = "GetResourse")]
+        public ActionResult<Resourse> GetById(string id)
+        {
+            var resourse = _resourseService.Get(id);
+
+            if (resourse == null)
+            {
+                return NotFound();
+            }
+
+            return resourse;
+        }
+
         [HttpPost]
         public ActionResult<Resourse> Create([FromBody] Resourse resourse)
         {
             _resourseService.Create(resourse);
 
-            return CreatedAtRoute("GetResourse", new { id = resourse._id.ToString() }, resourse);
+            return CreatedAtRoute("Get", new { id = resourse._id.ToString() }, resourse);
         }
 
         [HttpPut("{id:length(24)}")]
