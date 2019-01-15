@@ -4,6 +4,7 @@ using ResourseAPI.Models;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using ResourseAPI.Utility;
 
 namespace ResourseAPI.Services
 {
@@ -36,6 +37,7 @@ namespace ResourseAPI.Services
         public Resourse Create(Resourse resourse)
         {
             _resourses.InsertOne(resourse);
+            MailHelper.SendMail("silviu.alex95@yahoo.ro", "S-a creat resursa noua: " + resourse.Description);
             return resourse;
         }
 
