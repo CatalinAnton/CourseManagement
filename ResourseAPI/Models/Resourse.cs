@@ -26,9 +26,8 @@ namespace ResourseAPI.Models
         [BsonElement("Link")]
         [Required(ErrorMessage = "Link is required")]
         public string Link { get; set; }
-    
-        [BsonElement("CourseId")]
-        [Required(ErrorMessage = "CourseId is required")]
+
+        [BsonRepresentation(BsonType.ObjectId)]
         public string CourseId { get; set; }
     }
 }

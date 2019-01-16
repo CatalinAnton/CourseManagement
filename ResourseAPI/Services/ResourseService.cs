@@ -37,7 +37,6 @@ namespace ResourseAPI.Services
         public Resourse Create(Resourse resourse)
         {
             _resourses.InsertOne(resourse);
-            MailHelper.SendMail("silviu.alex95@yahoo.ro", "S-a creat resursa noua: " + resourse.Description);
             return resourse;
         }
 

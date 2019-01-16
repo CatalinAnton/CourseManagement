@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Http;
+using ResourseAPI.Utility;
+using System;
 
 namespace ResourseAPI.Controllers
 {
@@ -14,10 +17,14 @@ namespace ResourseAPI.Controllers
     public class ResourceController : ControllerBase
     {
         private readonly ResourseService _resourseService;
+        private readonly SubscribeService _subscribeService;
+        private readonly UserService _userService;
 
-        public ResourceController(ResourseService resourseService)
+        public ResourceController(ResourseService resourseService, SubscribeService subscribeService, UserService userService)
         {
             _resourseService = resourseService;
+            _subscribeService = subscribeService;
+            _userService = userService;
         }
 
         [HttpGet(Name = "Get")]
@@ -66,8 +73,37 @@ namespace ResourseAPI.Controllers
         [HttpPost]
         public ActionResult<Resourse> Create([FromBody] Resourse resourse)
         {
-            _resourseService.Create(resourse);
+            User user;
+            List<Subscribe> subscribes;
+            string message;
 
+           subscribes =  _subscribeService.GetByCourseId(resourse.CourseId);
+
+            if (subscribes == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var subscribe in subscribes)
+            {
+                user = _userService.Get(subscribe.ID_User);
+     
+                if (user == null)
+                {
+                    return NotFound();
+                }
+   
+
+                message = "S-a incarcat o noua resursa cu titlul " + resourse.Title + "\n"
+                          + "Cu descrierea: " + resourse.Description + "\n"
+                          + "Resursa poate fi accesata la: " + resourse.Link;
+           
+             
+
+                MailHelper.SendMail(user.Email, message);
+
+            }
+            _resourseService.Create(resourse);
             return CreatedAtRoute("Get", new { id = resourse._id.ToString() }, resourse);
         }
 
