@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ResourseAPI.Services;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ResourseAPI
 {
@@ -37,6 +38,13 @@ namespace ResourseAPI
                         .AllowCredentials());
             });
             services.AddScoped<ResourseService>();
+            services.AddScoped<SubscribeService>();
+            services.AddScoped<UserService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -51,6 +59,15 @@ namespace ResourseAPI
             {
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseCors("AllowSpecificOrigin");
             app.UseHttpsRedirection();
