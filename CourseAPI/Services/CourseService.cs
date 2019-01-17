@@ -30,6 +30,10 @@ namespace CourseAPI.Services
             return _courses.Find<Course>(course => course._id == docId).FirstOrDefault();
         }
 
+        public List<Course> GetByTitle(string title)
+        {   
+            return _courses.Find<Course>(course => course.Title.Contains(title)).ToList();
+        }
         public Course Create(Course course)
         {
             _courses.InsertOne(course);
