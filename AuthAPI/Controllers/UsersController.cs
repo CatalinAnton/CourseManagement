@@ -7,11 +7,11 @@ namespace AuthAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly UserService _userService;
 
-        public AuthController(UserService userService)
+        public UsersController(UserService userService)
         {
             _userService = userService;
         }

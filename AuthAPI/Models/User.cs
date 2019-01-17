@@ -5,6 +5,8 @@ namespace AuthAPI.Models
 {
     public class User
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId _id { get; set; }
 
         [BsonElement("Last_Name")]
