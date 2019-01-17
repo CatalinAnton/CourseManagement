@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace ResourseAPI.Models
 {
@@ -22,6 +23,10 @@ namespace ResourseAPI.Models
         [BsonElement("Type")]
         [Required(ErrorMessage = "Type is required")]
         public string Type { get; set; }
+
+        // [BsonElement("Raw")]
+        // [Required(ErrorMessage = "File is required")]
+        // public Microsoft.AspNetCore.Http.Internal.FormFile Raw { get; set; }
 
         [BsonElement("Link")]
         [Required(ErrorMessage = "Link is required")]
