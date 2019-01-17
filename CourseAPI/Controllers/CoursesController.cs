@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using CourseAPI.Models;
 using CourseAPI.Services;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System;
 
 namespace CourseAPI.Controllers
 {
@@ -22,6 +24,20 @@ namespace CourseAPI.Controllers
         public ActionResult<List<Course>> Get()
         {
             return _courseService.Get();
+        }
+
+        [Route("search/{title}")]
+        [HttpGet]
+        public ActionResult<List<Course>> searchByTitle(string title)
+        {
+            List<Course> course = _courseService.GetByTitle(title);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return course;
         }
 
         [HttpGet("{id:length(24)}", Name = "GetCourse")]
