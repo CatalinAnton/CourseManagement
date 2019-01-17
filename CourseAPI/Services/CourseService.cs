@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CourseAPI.Models;
+using AuthAPI.Services;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -10,15 +11,22 @@ namespace CourseAPI.Services
     public class CourseService
     {
         private readonly IMongoCollection<Course> _courses;
+        private readonly SessionService _sessionsService;
 
         public CourseService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("CourseManagementDB"));
             var database = client.GetDatabase("CourseManagementDB");
             _courses = database.GetCollection<Course>("Course");
+            _sessionsService = new SessionService(config);
         }
 
-        public List<Course> Get()
+        private SessionService GetSessionService()
+        {
+            return this._sessionsService;
+        }
+
+        public List<Course> Get(string token)
         {
             return _courses.Find(course => true).ToList();
         }

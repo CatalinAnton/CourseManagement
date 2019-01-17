@@ -18,9 +18,6 @@ namespace AuthAPI.Services
             var client = new MongoClient(config.GetConnectionString("CourseManagementDB"));
             var database = client.GetDatabase("CourseManagementDB");
             _sessions = database.GetCollection<Session>("Sessions");
-
-            var usersClient = new MongoClient(config.GetConnectionString("CourseManagementDB"));
-            var usersDatabase = client.GetDatabase("CourseManagementDB");
             _users = database.GetCollection<User>("Users");
         }
 

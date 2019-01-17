@@ -25,7 +25,7 @@ namespace CourseAPI.Models
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
 
-        [BsonElement("Sessions")]
-        public List<Session> Sessions { get; set; }
+        [BsonElement("Finals")]
+        public List<Final> Finals { get; set; }
     }
 }
