@@ -26,7 +26,7 @@ namespace CourseAPI.Services
             return this._sessionsService;
         }
 
-        public List<Course> Get(string token)
+        public List<Course> Get()
         {
             return _courses.Find(course => true).ToList();
         }
@@ -39,9 +39,10 @@ namespace CourseAPI.Services
         }
 
         public List<Course> GetByTitle(string title)
-        {   
+        {
             return _courses.Find<Course>(course => course.Title.Contains(title)).ToList();
         }
+
         public Course Create(Course course)
         {
             _courses.InsertOne(course);
