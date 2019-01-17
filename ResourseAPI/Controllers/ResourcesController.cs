@@ -12,6 +12,7 @@ using System;
 
 namespace ResourseAPI.Controllers
 {
+    // localhost:5005/api/resourses
     [Route("api/resourses")]
     [ApiController]
     public class ResourceController : ControllerBase
@@ -70,7 +71,8 @@ namespace ResourseAPI.Controllers
             return resourse;
         }
 
-        [HttpPost]
+        // localhost:5005/api/resourses/create
+        [HttpPost("create")]
         public ActionResult<Resourse> Create([FromBody] Resourse resourse)
         {
             User user;
@@ -83,7 +85,6 @@ namespace ResourseAPI.Controllers
             {
                 return NotFound();
             }
-
             foreach (var subscribe in subscribes)
             {
                 user = _userService.Get(subscribe.ID_User);
@@ -92,14 +93,11 @@ namespace ResourseAPI.Controllers
                 {
                     return NotFound();
                 }
-   
 
                 message = "S-a incarcat o noua resursa cu titlul " + resourse.Title + "\n"
                           + "Cu descrierea: " + resourse.Description + "\n"
                           + "Resursa poate fi accesata la: " + resourse.Link;
-           
-             
-
+        
                 MailHelper.SendMail(user.Email, message);
 
             }
@@ -137,29 +135,32 @@ namespace ResourseAPI.Controllers
             return NoContent();
         }
 
-        [HttpPost("upload")]
-        public async Task<IActionResult> Post(List<Microsoft.AspNetCore.Http.IFormFile> files)
-        {
-            long size = files.Sum(f => f.Length);
+        // [HttpPost("upload")]
+        // public async Task<IActionResult> Post(List<Microsoft.AspNetCore.Http.IFormFile> files)
+        // {
+        //     System.Console.WriteLine("******************");
+        //     long size = files.Sum(f => f.Length);
 
-            // full path to file in temp location
-            var filePath = Path.GetTempFileName();
+        //     // full path to file in temp location
+        //     var filePath = Path.GetTempFileName();
 
-            foreach (var formFile in files)
-            {
-                if (formFile.Length > 0)
-                {
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
-                }
-            }
+        //     foreach (var formFile in files)
+        //     {
+        //         if (formFile.Length > 0)
+        //         {
+        //             using (var stream = new FileStream(filePath, FileMode.Create))
+        //             {
+        //                 System.Console.WriteLine("******************");
+        //                 await formFile.CopyToAsync(stream);
+        //             }
+        //         }
+        //     }
 
-            // process uploaded files
-            // Don't rely on or trust the FileName property without validation.
+        //     // process uploaded files
+        //     // Don't rely on or trust the FileName property without validation.
 
-            return Ok(new { count = files.Count, size, filePath });
-        }
+        //     return Ok(new { count = files.Count, size, filePath });
+        // }
+
     }
 }
