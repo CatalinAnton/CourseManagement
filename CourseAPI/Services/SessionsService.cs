@@ -8,11 +8,11 @@ using MongoDB.Driver;
 
 namespace AuthAPI.Services
 {
-    public class SessionService
+    public class SessionsService
     {
         private readonly IMongoCollection<Session> _sessions;
 
-        public SessionService(IConfiguration config)
+        public SessionsService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("CourseManagementDB"));
             var database = client.GetDatabase("CourseManagementDB");

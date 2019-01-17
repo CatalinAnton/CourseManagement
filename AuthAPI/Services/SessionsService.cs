@@ -2,18 +2,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AuthAPI.Models;
+using AuthAPI.Utility;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AuthAPI.Services
 {
-    public class SessionService
+    public class SessionsService
     {
         private readonly IMongoCollection<Session> _sessions;
         private readonly IMongoCollection<User> _users;
 
-        public SessionService(IConfiguration config)
+        public SessionsService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("CourseManagementDB"));
             var database = client.GetDatabase("CourseManagementDB");
@@ -26,16 +27,17 @@ namespace AuthAPI.Services
             return _sessions.Find<Session>(session => session.Token == token).FirstOrDefault();
         }
 
-        public Session Create(User user)
+        public Token Create(User user)
         {
-            var User = _users.Find<User>(userFromDb => userFromDb.Email == user.Email && userFromDb.Password == user.Password).FirstOrDefault();
+            var userFromDatabase = _users.Find<User>(entry => entry.Email == user.Email && entry.Password == user.Password).FirstOrDefault();
 
-            if (User != null)
+            if (userFromDatabase != null)
             {
-                string Token = new ObjectId().ToString();
-                Session session = new Session(user._id.ToString(), Token);
+                string token = TokenProvider.CreateToken(24);
+                Session session = new Session(userFromDatabase._id.ToString(), token);
+                Token response = new Token(token);
                 _sessions.InsertOne(session);
-                return session;
+                return response;
             }
             else
             {

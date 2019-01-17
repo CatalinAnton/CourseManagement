@@ -5,27 +5,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly UsersService _usersService;
 
-        public UsersController(UserService userService)
+        public UsersController(UsersService usersService)
         {
-            _userService = userService;
+            _usersService = usersService;
         }
 
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
-            return _userService.Get();
+            return _usersService.Get();
         }
 
         [HttpGet("{id:length(24)}", Name = "GetUser")]
         public ActionResult<User> Get(string id)
         {
-            var user = _userService.Get(id);
+            var user = _usersService.Get(id);
 
             if (user == null)
             {
@@ -38,7 +38,7 @@ namespace AuthAPI.Controllers
         [HttpPost]
         public ActionResult<User> Create(User user)
         {
-            _userService.Create(user);
+            _usersService.Create(user);
 
             return CreatedAtRoute("GetUser", new { id = user._id.ToString() }, user);
         }
@@ -46,14 +46,14 @@ namespace AuthAPI.Controllers
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, User userIn)
         {
-            var user = _userService.Get(id);
+            var user = _usersService.Get(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            _userService.Update(id, userIn);
+            _usersService.Update(id, userIn);
 
             return NoContent();
         }
@@ -61,14 +61,14 @@ namespace AuthAPI.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var user = _userService.Get(id);
+            var user = _usersService.Get(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            _userService.Remove(user._id);
+            _usersService.Remove(user._id);
 
             return NoContent();
         }

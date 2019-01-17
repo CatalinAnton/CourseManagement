@@ -9,21 +9,21 @@ namespace AuthAPI.Controllers
     [ApiController]
     public class SessionsController : ControllerBase
     {
-        private readonly SessionService _sessionService;
+        private readonly SessionsService _sessionsService;
 
-        public SessionsController(SessionService sessionService)
+        public SessionsController(SessionsService sessionsService)
         {
-            _sessionService = sessionService;
+            _sessionsService = sessionsService;
         }
 
         [HttpPost]
-        public ActionResult<Session> Create(User user)
+        public ActionResult<Token> Create(User user)
         {
-            var session = _sessionService.Create(user);
+            var session = _sessionsService.Create(user);
 
             if (session != null)
             {
-                return CreatedAtRoute("GetSession", new { id = session._id.ToString() }, session);
+                return session;
             }
             else
             {
@@ -31,19 +31,19 @@ namespace AuthAPI.Controllers
             }
         }
 
-        [HttpDelete("{token:length(24)}")]
-        public IActionResult Delete(string token)
-        {
-            var session = _sessionService.Get(token);
+        // [HttpDelete("{token:length(24)}")]
+        // public IActionResult Delete(string token)
+        // {
+        //     var session = _sessionsService.Get(token);
 
-            if (session == null)
-            {
-                return NotFound();
-            }
+        //     if (session == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            _sessionService.Remove(session._id);
+        //     _sessionsService.Remove(session._id);
 
-            return NoContent();
-        }
+        //     return NoContent();
+        // }
     }
 }

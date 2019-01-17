@@ -9,7 +9,7 @@ namespace AuthAPI.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId _id { get; private set; }
 
-        [BsonElement("User_ID")]
+        [BsonElement("UserID")]
         public string UserID { get; private set; }
 
         [BsonElement("Token")]

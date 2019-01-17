@@ -16,9 +16,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AuthAPI\AuthAPI.csproj" />
-    <ProjectReference Include="..\ResourseAPI\ResourseAPI.csproj" />
-  </ItemGroup>
-
 </Project>
