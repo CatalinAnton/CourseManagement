@@ -12,13 +12,6 @@ dotNet 2018-2019 project
 
 ### Description ###
 
-
-### Tools ###
- (use initMongoDB.bat to configure MongoDB for this project)
-
-
-# CourseManagement
-
 Web Application that provides the possibility to manage your study courses both as a lecturer and as an attendant. The product is designed to manage __course resources__, put and answer to questions and give explanations in the __chat__, and to be subscribed and get notified when your favorite courses are uploading new content.
 
 ## Getting Started
