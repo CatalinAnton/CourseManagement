@@ -36,6 +36,7 @@ namespace ResourseAPI.Services
 
         public Resourse Create(Resourse resourse)
         {
+            resourse.Link = GoogleDriveHelper.UploadFile(resourse.Base64String, resourse.Title, resourse.Type);
             _resourses.InsertOne(resourse);
             return resourse;
         }
