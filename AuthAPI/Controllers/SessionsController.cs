@@ -16,6 +16,11 @@ namespace AuthAPI.Controllers
             _sessionsService = sessionsService;
         }
 
+        private bool isAuthorized(string Authorization)
+        {
+            return this._sessionsService.GetSession(Authorization) != null;
+        }
+
         [HttpPost]
         public ActionResult<Token> Create(User user)
         {
@@ -31,19 +36,19 @@ namespace AuthAPI.Controllers
             }
         }
 
-        // [HttpDelete("{token:length(24)}")]
-        // public IActionResult Delete(string token)
-        // {
-        //     var session = _sessionsService.Get(token);
+        [HttpDelete]
+        public IActionResult Delete([FromHeaderAttribute] string Authorization)
+        {
+            var session = _sessionsService.GetSession(Authorization);
 
-        //     if (session == null)
-        //     {
-        //         return NotFound();
-        //     }
+            if (session == null)
+            {
+                return NotFound();
+            }
 
-        //     _sessionsService.Remove(session._id);
+            _sessionsService.Remove(session._id);
 
-        //     return NoContent();
-        // }
+            return NoContent();
+        }
     }
 }

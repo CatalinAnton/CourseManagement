@@ -22,10 +22,19 @@ namespace CourseAPI.Controllers
             _courseService = courseService;
             _sessionsService = sessionsService;
         }
-        
+
         private bool isAuthorized(string Authorization)
         {
-            return this._sessionsService.Get(Authorization) != null;
+            return this._sessionsService.GetSession(Authorization) != null;
+        }
+
+        private bool isUserATeacher(string Authorization)
+        {
+            var user = this._sessionsService.GetUser(Authorization);
+
+            return user != null
+                ? user.Role == "teacher"
+                : false;
         }
 
         [HttpGet]
@@ -86,10 +95,9 @@ namespace CourseAPI.Controllers
         [HttpPost]
         public ActionResult<Course> Create([FromHeaderAttribute] string Authorization, Course course)
         {
-            if (isAuthorized(Authorization))
+            if (isAuthorized(Authorization) && isUserATeacher(Authorization))
             {
                 _courseService.Create(course);
-
                 return CreatedAtRoute("GetCourse", new { id = course._id.ToString() }, course);
             }
             else
@@ -121,7 +129,7 @@ namespace CourseAPI.Controllers
         }
 
         [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete([FromHeaderAttribute] string Authorization, string id)
         {
             if (isAuthorized(Authorization))
             {

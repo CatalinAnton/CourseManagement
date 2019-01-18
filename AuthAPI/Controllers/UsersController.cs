@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using AuthAPI.Models;
 using AuthAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 namespace AuthAPI.Controllers
 {
@@ -10,12 +11,29 @@ namespace AuthAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UsersService _usersService;
+        private readonly SessionsService _sessionsService;
 
-        public UsersController(UsersService usersService)
+        public UsersController(UsersService usersService, SessionsService sessionsService)
         {
             _usersService = usersService;
+            _sessionsService = sessionsService;
         }
 
+        private bool isAuthorized(string Authorization)
+        {
+            return this._sessionsService.GetSession(Authorization) != null;
+        }
+
+        private bool isUserIdentical(string Authorization, string id)
+        {
+            var user = this._sessionsService.GetUser(Authorization);
+            var docId = new ObjectId(id);
+
+            return user != null
+                ? user._id == docId
+                : false;
+        }
+        
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
@@ -44,33 +62,47 @@ namespace AuthAPI.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, User userIn)
+        public IActionResult Update([FromHeaderAttribute] string Authorization, string id, User userIn)
         {
-            var user = _usersService.Get(id);
-
-            if (user == null)
+            if (isAuthorized(Authorization) && isUserIdentical(Authorization, id))
             {
-                return NotFound();
+                var user = _usersService.Get(id);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                _usersService.Update(id, userIn);
+
+                return NoContent();
             }
-
-            _usersService.Update(id, userIn);
-
-            return NoContent();
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete([FromHeaderAttribute] string Authorization, string id)
         {
-            var user = _usersService.Get(id);
-
-            if (user == null)
+            if (isAuthorized(Authorization) && isUserIdentical(Authorization, id))
             {
-                return NotFound();
+                var user = _usersService.Get(id);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                _usersService.Remove(user._id);
+
+                return NoContent();
             }
-
-            _usersService.Remove(user._id);
-
-            return NoContent();
+            else
+            {
+                return Unauthorized();
+            }
         }
     }
 }
