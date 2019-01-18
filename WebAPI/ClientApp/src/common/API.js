@@ -1,6 +1,6 @@
 export default (() => {
   const headers = {
-    'Authorization': '',
+    'Authorization': 'rAIgg5w8fBeXdXOThITnIOi9',
     'Content-Type': 'application/json'
   }
 
@@ -31,6 +31,8 @@ export default (() => {
 
   const PATCH = (location, body) => Fetch('PATCH', location, body)
 
+  const DELETE = (location, body) => Fetch('DELETE', location, body)
+
   const setHeader = (header, value) => {
     headers[header] = value
   }
@@ -40,6 +42,7 @@ export default (() => {
     POST,
     PUT,
     PATCH,
+    DELETE,
     setHeader
   }
 })()

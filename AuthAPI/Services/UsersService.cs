@@ -32,7 +32,7 @@ namespace AuthAPI.Services
 
         public User Create(User user)
         {
-            user.IsActive = user.Role == "teacher";
+            user.IsActive = user.Role != "teacher";
             _users.InsertOne(user);
             return user;
         }

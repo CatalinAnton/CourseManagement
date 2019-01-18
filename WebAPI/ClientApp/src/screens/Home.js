@@ -4,27 +4,26 @@ import {
   CardHeader,
   CardBody,
   CardTitle,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  Button,
-  ButtonGroup,
   Container,
   Row,
   Col
 } from 'reactstrap'
-import { withRouter } from 'react-router-dom'
+
+import { RegisterForm, LoginForm } from '../components'
 
 class Home extends Component {
-  _handleSubmit = event => {
-    const { history } = this.props
-    history.push('/teacher_courses')
+  state = {
+    form: 'login'
+  }
+
+  _changeForm = form => () => {
+    this.setState({
+      form
+    })
   }
 
   render () {
+    const { form } = this.state
     return (
       <Container>
         <Row>
@@ -34,26 +33,11 @@ class Home extends Component {
                 <CardTitle>Welcome!</CardTitle>
               </CardHeader>
               <CardBody>
-                <Form onSubmit={this._handleSubmit}>
-                  <FormGroup>
-                    <Label>Username</Label>
-                    <InputGroup>
-                      <InputGroupAddon addonType='prepend'> @ </InputGroupAddon>
-                      <Input type='text' />
-                    </InputGroup>
-                    <Label>Password</Label>
-                    <InputGroup>
-                      <InputGroupAddon addonType='prepend'>**</InputGroupAddon>
-                      <Input type='password' />
-                    </InputGroup>
-                  </FormGroup>
-                  <FormGroup>
-                    <ButtonGroup>
-                      <Button color='primary'>Login</Button>
-                      <Button>Register</Button>
-                    </ButtonGroup>
-                  </FormGroup>
-                </Form>
+                {form === 'login' ? (
+                  <LoginForm changeForm={this._changeForm('register')} />
+                ) : (
+                  <RegisterForm changeForm={this._changeForm('login')} />
+                )}
               </CardBody>
             </Card>
           </Col>
@@ -63,4 +47,4 @@ class Home extends Component {
   }
 }
 
-export default withRouter(Home)
+export default Home
