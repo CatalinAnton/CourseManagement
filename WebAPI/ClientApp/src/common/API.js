@@ -1,6 +1,6 @@
 export default (() => {
   const headers = {
-    'Authorization': 'rAIgg5w8fBeXdXOThITnIOi9',
+    'Authorization': 'F5KoaoobdN0pXp31Z4CjRt1h',
     'Content-Type': 'application/json'
   }
 

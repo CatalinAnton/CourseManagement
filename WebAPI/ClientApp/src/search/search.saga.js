@@ -5,12 +5,16 @@ import { setCourses } from '../courses/courses.actions'
 
 function * searchSaga (action) {
   const { term, resolve, reject } = action.payload
-  const response = yield call(search, term)
-  if (response.status === 200) {
-    yield put(setCourses(response.data))
-    resolve && resolve()
-  } else {
-    reject && reject()
+  try {
+    const response = yield call(search, term)
+    if (response.status === 200) {
+      yield put(setCourses(response.data))
+      resolve && resolve()
+    } else {
+      reject && reject()
+    }
+  } catch (error) {
+    console.log('Search error', error)
   }
 }
 

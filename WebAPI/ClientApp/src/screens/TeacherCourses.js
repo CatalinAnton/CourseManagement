@@ -40,10 +40,10 @@ class TeacherCourses extends Component {
     this.setState({
       searchTerm: event.target.value
     }, async () => {
-      const { searchTerm } = this.state
       const { search } = this.props
+      const { searchTerm } = this.state
       try {
-        const courses = await promiseDispatch(search, { term: searchTerm })
+        await promiseDispatch(search, { term: searchTerm })
       } catch (error) {
         console.log(error)
       }
@@ -101,7 +101,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  getCourses
+  getCourses,
+  search
 }
 
 export default connect(
