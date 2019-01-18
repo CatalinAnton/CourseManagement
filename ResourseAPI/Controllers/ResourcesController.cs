@@ -14,6 +14,7 @@ using System;
 
 namespace ResourseAPI.Controllers
 {
+    // localhost:5005/api/resourses
     [Route("api/resourses")]
     [ApiController]
     public class ResourceController : ControllerBase
@@ -102,7 +103,8 @@ namespace ResourseAPI.Controllers
             }
         }
 
-        [HttpPost]
+        // localhost:5005/api/resourses/create
+        [HttpPost("create")]
         public ActionResult<Resourse> Create([FromHeaderAttribute] string Authorization, [FromBody] Resourse resourse)
         {
             if (isAuthorized(Authorization) && isUserATeacher(Authorization))
@@ -192,36 +194,31 @@ namespace ResourseAPI.Controllers
             }
         }
 
-        [HttpPost("upload")]
-        public async Task<IActionResult> Post([FromHeaderAttribute] string Authorization, List<Microsoft.AspNetCore.Http.IFormFile> files)
-        {
-            if (isAuthorized(Authorization))
-            {
-                long size = files.Sum(f => f.Length);
+        // [HttpPost("upload")]
+        // public async Task<IActionResult> Post(List<Microsoft.AspNetCore.Http.IFormFile> files)
+        // {
+        //     long size = files.Sum(f => f.Length);
 
-                // full path to file in temp location
-                var filePath = Path.GetTempFileName();
+        //     // full path to file in temp location
+        //     var filePath = Path.GetTempFileName();
 
-                foreach (var formFile in files)
-                {
-                    if (formFile.Length > 0)
-                    {
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await formFile.CopyToAsync(stream);
-                        }
-                    }
-                }
+        //     foreach (var formFile in files)
+        //     {
+        //         if (formFile.Length > 0)
+        //         {
+        //             using (var stream = new FileStream(filePath, FileMode.Create))
+        //             {
+        //                 System.Console.WriteLine("******************");
+        //                 await formFile.CopyToAsync(stream);
+        //             }
+        //         }
+        //     }
 
-                // process uploaded files
-                // Don't rely on or trust the FileName property without validation.
+        //     // process uploaded files
+        //     // Don't rely on or trust the FileName property without validation.
 
-                return Ok(new { count = files.Count, size, filePath });
-            }
-            else
-            {
-                return Unauthorized();
-            }
-        }
+        //     return Ok(new { count = files.Count, size, filePath });
+        // }
+
     }
 }
