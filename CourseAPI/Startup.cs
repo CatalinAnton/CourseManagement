@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CourseAPI.Services;
+using AuthAPI.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace CourseAPI
@@ -29,6 +30,7 @@ namespace CourseAPI
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
+            services.AddScoped<SessionsService>();
             services.AddScoped<CourseService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c =>

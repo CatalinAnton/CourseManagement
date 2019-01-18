@@ -7,15 +7,15 @@ using MongoDB.Driver;
 
 namespace AuthAPI.Services
 {
-    public class UserService
+    public class UsersService
     {
         private readonly IMongoCollection<User> _users;
 
-        public UserService(IConfiguration config)
+        public UsersService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("CourseManagementDB"));
             var database = client.GetDatabase("CourseManagementDB");
-            _users = database.GetCollection<User>("User");
+            _users = database.GetCollection<User>("Users");
         }
 
         public List<User> Get()
@@ -32,6 +32,7 @@ namespace AuthAPI.Services
 
         public User Create(User user)
         {
+            user.IsActive = user.Role == "teacher";
             _users.InsertOne(user);
             return user;
         }

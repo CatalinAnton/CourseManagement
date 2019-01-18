@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SubscribeAPI.Services;
+using AuthAPI.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SubscribeAPI
@@ -29,8 +30,9 @@ namespace SubscribeAPI
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
+            services.AddScoped<SessionsService>();
             services.AddScoped<SubscribeService>();
-            services.AddScoped<UserService>();
+            services.AddScoped<UsersService>();
             services.AddScoped<CourseService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c =>

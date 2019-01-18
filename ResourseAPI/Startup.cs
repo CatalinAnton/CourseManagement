@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ResourseAPI.Services;
+using AuthAPI.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace ResourseAPI
@@ -29,9 +30,10 @@ namespace ResourseAPI
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
+            services.AddScoped<SessionsService>();
             services.AddScoped<ResourseService>();
             services.AddScoped<SubscribeService>();
-            services.AddScoped<UserService>();
+            services.AddScoped<UsersService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CourseAPI.Models;
+using AuthAPI.Services;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -31,9 +32,10 @@ namespace CourseAPI.Services
         }
 
         public List<Course> GetByTitle(string title)
-        {   
+        {
             return _courses.Find<Course>(course => course.Title.Contains(title)).ToList();
         }
+
         public Course Create(Course course)
         {
             _courses.InsertOne(course);

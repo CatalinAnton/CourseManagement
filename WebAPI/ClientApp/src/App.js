@@ -5,8 +5,7 @@ import { Home, TeacherCourses } from './screens'
 
 export default () => (
   <Fragment>
-    <Route path='/teacher_courses' component={TeacherCourses} />
+    <Route path='/dashboard' component={TeacherCourses} />
     <Route exact path='/' component={Home} />
-    {/* <ProtectedRoute exact path="/student" component={StudentHomePage} /> */}
   </Fragment>
 )

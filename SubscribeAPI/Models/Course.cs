@@ -6,8 +6,6 @@ namespace SubscribeAPI.Models
 {
     public class Course
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId _id { get; private set; }
 
         [BsonElement("Year")]
@@ -25,5 +23,8 @@ namespace SubscribeAPI.Models
         [BsonElement("Title")]
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
+
+        [BsonElement("Finals")]
+        public List<Final> Finals { get; set; }
     }
 }

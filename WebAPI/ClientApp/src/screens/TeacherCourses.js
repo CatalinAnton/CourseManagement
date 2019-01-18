@@ -6,7 +6,8 @@ import {
   CardBody,
   CardTitle,
   CardText,
-  ButtonGroup
+  ButtonGroup,
+  Input
 } from 'reactstrap'
 import { connect } from 'react-redux'
 
@@ -14,15 +15,18 @@ import { CourseModal, LinkModal, ResourceModal } from '../components'
 import { promiseDispatch } from '../common'
 import { selectCourses, getCourses } from '../courses'
 import { Resources } from '../resources'
+import { search } from '../search'
 
 class TeacherCourses extends Component {
   state = {
     error: '',
+    searchTerm: '',
     loading: true
   }
 
   async componentDidMount () {
     const { getCourses } = this.props
+
     try {
       await promiseDispatch(getCourses)
     } catch (error) {
@@ -32,8 +36,22 @@ class TeacherCourses extends Component {
     this.setState({ loading: false })
   }
 
+  _search = event => {
+    this.setState({
+      searchTerm: event.target.value
+    }, async () => {
+      const { search } = this.props
+      const { searchTerm } = this.state
+      try {
+        await promiseDispatch(search, { term: searchTerm })
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  }
+
   render () {
-    const { error, loading } = this.state
+    const { error, searchTerm, loading } = this.state
     const { courses } = this.props
 
     if (error) return <p>Something went wrong... {error}</p>
@@ -43,6 +61,11 @@ class TeacherCourses extends Component {
       <Card>
         <CardHeader>
           <CardTitle tag='h1'>Courses</CardTitle>
+          <Input
+            type='text'
+            onChange={this._search}
+            value={searchTerm}
+          />
         </CardHeader>
 
         <CardBody>
@@ -78,7 +101,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  getCourses
+  getCourses,
+  search
 }
 
 export default connect(

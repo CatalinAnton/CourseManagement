@@ -1,7 +1,8 @@
 import { SET_AUTHENTIFIED_STATE } from './auth.constants'
 
 const initialState = {
-  authentified: false
+  authentified: false,
+  token: ''
 }
 
 export default (state = initialState, action = {}) => {
@@ -9,7 +10,8 @@ export default (state = initialState, action = {}) => {
     case SET_AUTHENTIFIED_STATE:
       return {
         ...state,
-        authentified: action.payload.authentified
+        authentified: action.payload.authentified,
+        token: action.payload.token
       }
     default:
       return state
