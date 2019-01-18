@@ -4,13 +4,7 @@ using ResourseAPI.Services;
 using AuthAPI.Models;
 using AuthAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Microsoft.AspNetCore.Http;
 using ResourseAPI.Utility;
-using System;
 
 namespace ResourseAPI.Controllers
 {

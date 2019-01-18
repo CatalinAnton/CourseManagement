@@ -2,7 +2,6 @@
 using System.Linq;
 using ResourseAPI.Models;
 using Microsoft.Extensions.Configuration;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using ResourseAPI.Utility;
 
@@ -36,6 +35,7 @@ namespace ResourseAPI.Services
 
         public Resourse Create(Resourse resourse)
         {
+            resourse.Link = GoogleDriveHelper.UploadFile(resourse.Base64String, resourse.Title, resourse.Type);
             _resourses.InsertOne(resourse);
             return resourse;
         }
