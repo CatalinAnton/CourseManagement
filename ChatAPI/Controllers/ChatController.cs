@@ -2,12 +2,6 @@
 using ChatAPI.Models;
 using ChatAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Microsoft.AspNetCore.Http;
-using System;
 
 namespace ChatAPI.Controllers
 {

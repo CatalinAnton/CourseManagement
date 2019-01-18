@@ -3,8 +3,6 @@ using CourseAPI.Models;
 using CourseAPI.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System;
 
 namespace CourseAPI.Controllers
 {

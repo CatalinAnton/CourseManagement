@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
-using ChatAPI.Models;
-using ChatAPI.Services;
 
 namespace ChatAPI.Hubs
 {
